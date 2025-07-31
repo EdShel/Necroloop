@@ -13,13 +13,14 @@ static var encounters: Array[EncounterMetadata] = [
 		"enemy_id": "duck",
 		"enemy_name": "Alpha sapwing",
 		"health": 500,
-		"cards": ["regen", "regen"]
+		"cards": ["regen", "regen"],
 	}),
 	EncounterMetadata.new({
 		"enemy_id": "duck",
 		"enemy_name": "Omicron sapwing",
 		"health": 500,
-		"cards": ["", "", "regen", "regen", "regen", "regen", ""]
+		"cards": ["", "multi", "multi", "regen", "regen", "regen", ""],
+		"reward_cards": ["multi"],
 	}),
 ]
 

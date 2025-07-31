@@ -15,6 +15,12 @@ static var cards: Array[CardMetadata] = [
 		{ "amount": 100 }
 	),
 	CardMetadata.new(
+		"multi",
+		"Tallying",
+		"If caster's previous card wasn't attack, their next card is 4x powerful",
+		{ "amount": 4 }
+	),
+	CardMetadata.new(
 		"loop",
 		"Loop",
 		"Play all cards again. Cards to the right won't be played"

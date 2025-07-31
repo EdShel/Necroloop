@@ -7,6 +7,8 @@ var _next_card_index: int = 0
 var _next_turn_is_player = false
 var _is_finished: bool = false
 var _timer: float = 0
+var _last_played_cards: Dictionary[bool, CardsData.CardMetadata] = { false: null, true: null }
+var _accumulated_multipliers: Dictionary[bool, int] = { false: 1, true: 1 }
 
 func _ready() -> void:
 	board = get_parent()
@@ -61,18 +63,29 @@ func _process_next_card() -> void:
 func _play_card(card: Card, is_player: bool) -> void:
 	card.set_shining_enabled(true)
 	
+	var multiplier = _accumulated_multipliers[is_player]
+	var last_player_card = _last_played_cards[is_player]
 	var card_meta = CardsData.get_data(card.id)
 	match card_meta.id:
 		"attack":
-			Bus.portrait_damaged.emit(card_meta.get_amount(), !is_player)
+			Bus.portrait_damaged.emit(card_meta.get_amount() * multiplier, !is_player)
 			_advance_to_next_slot()
 		"regen":
-			Bus.portrait_damaged.emit(-card_meta.get_amount(), is_player)
+			Bus.portrait_damaged.emit(-card_meta.get_amount() * multiplier, is_player)
+			_advance_to_next_slot()
+		"multi":
+			if !last_player_card || last_player_card.id != "attack":
+				_accumulated_multipliers[is_player] = card_meta.get_amount() * multiplier
 			_advance_to_next_slot()
 		"loop":
 			_next_card_index = 0
 			_next_turn_is_player = false
 			loop_index += 1
+	
+	if card_meta.id != "multi":
+		_accumulated_multipliers[is_player] = 1
+	
+	_last_played_cards[is_player] = card_meta
 	
 
 func _advance_to_next_slot() -> void:
