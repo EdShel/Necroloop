@@ -11,7 +11,7 @@ func _ready() -> void:
 		remove_child(x)
 		x.queue_free()
 	var card_scene = preload("res://objects/cards/card.tscn")
-	for id in ["attack", "attack", "regen", "loop"]:
+	for id in ["attack", "attack","attack","attack","attack","attack","attack","attack","attack", "regen", "loop"]:
 		var card = card_scene.instantiate()
 		card.id = id
 		add_child(card)

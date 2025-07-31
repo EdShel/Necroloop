@@ -1,8 +1,21 @@
 extends Node2D
 class_name Board
 
+var _board_player: BoardPlayer = null
+
 func _ready() -> void:
 	_init_enemy_table(["regen", "regen"])
+	
+	Bus.battle_win.connect(func():
+		_board_player.queue_free()
+		_board_player = null
+		Bus.reset_player.emit()
+	)
+	Bus.battle_defeat.connect(func(_reason):
+		_board_player.queue_free()
+		_board_player = null
+		Bus.reset_player.emit()
+	)
 
 func _init_enemy_table(cards_ids: Array[String]) -> void:
 	for slot in %EnemyTable.get_children():
@@ -18,3 +31,26 @@ func _init_enemy_table(cards_ids: Array[String]) -> void:
 		var card = card_scene.instantiate() as Card
 		card.id = card_id
 		slot.add_child(card)
+
+
+func _on_play_button_clicked() -> void:
+	if _board_player:
+		return
+	_board_player = preload("res://objects/board_player.tscn").instantiate()
+	add_child(_board_player)
+
+func get_player_table_card(index: int) -> Card:
+	var slot = %Table.get_child(index)
+	for child in slot.get_children():
+		return child
+	return null
+
+func get_enemy_table_card(index: int) -> Card:
+	var slot = %EnemyTable.get_child(index)
+	for child in slot.get_children():
+		if child is Card:
+			return child
+	return null
+
+func get_slots_count() -> int:
+	return %Table.get_child_count()

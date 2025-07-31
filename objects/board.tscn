@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://gpafxrx4i5wx"]
+[gd_scene load_steps=9 format=3 uid="uid://gpafxrx4i5wx"]
 
 [ext_resource type="PackedScene" uid="uid://b1kbi5lnjkpjg" path="res://objects/enemy/enemy_slot.tscn" id="1_liekj"]
 [ext_resource type="PackedScene" uid="uid://c6niequrehxah" path="res://objects/hand/hand.tscn" id="1_s2cr6"]
 [ext_resource type="Script" uid="uid://wdsjq6l5yne7" path="res://objects/board.gd" id="1_tyihr"]
 [ext_resource type="PackedScene" uid="uid://cwopxsf733vi2" path="res://objects/table/card_slot.tscn" id="2_s2cr6"]
+[ext_resource type="PackedScene" uid="uid://b6c1xu5i60nl7" path="res://objects/ui/game/play_button.tscn" id="5_mumcj"]
+[ext_resource type="PackedScene" uid="uid://bjf684cb746yx" path="res://objects/portraits/portrait.tscn" id="6_xtn1n"]
 
 [sub_resource type="Gradient" id="Gradient_s2cr6"]
 colors = PackedColorArray(0, 0, 0, 1, 0.0356112, 0.0659506, 0.143777, 1)
@@ -26,7 +28,7 @@ metadata/_edit_lock_ = true
 
 [node name="EnemyTable" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(200, 200)
+position = Vector2(450, 200)
 
 [node name="EnemySlot1" parent="EnemyTable" instance=ExtResource("1_liekj")]
 
@@ -49,7 +51,8 @@ position = Vector2(1050, 0)
 position = Vector2(1260, 0)
 
 [node name="Table" type="Node2D" parent="."]
-position = Vector2(200, 500)
+unique_name_in_owner = true
+position = Vector2(450, 500)
 
 [node name="Slot1" parent="Table" instance=ExtResource("2_s2cr6")]
 
@@ -72,8 +75,21 @@ position = Vector2(1050, 0)
 position = Vector2(1260, 0)
 
 [node name="Hand" parent="." instance=ExtResource("1_s2cr6")]
-position = Vector2(200, 830)
-container_width = 1720.0
+position = Vector2(450, 830)
+container_width = 1220.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
+
+[node name="PlayButton" parent="." instance=ExtResource("5_mumcj")]
+unique_name_in_owner = true
+position = Vector2(1600, 920)
+
+[node name="PlayerPortrait" parent="." instance=ExtResource("6_xtn1n")]
+position = Vector2(210, 500)
+
+[node name="EnemyPortrait" parent="." instance=ExtResource("6_xtn1n")]
+position = Vector2(210, 200)
+id = "duck"
+
+[connection signal="clicked" from="PlayButton" to="." method="_on_play_button_clicked"]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6c1xu5i60nl7"]
+
+[ext_resource type="Script" uid="uid://d1ooy2f1u3ejo" path="res://objects/ui/game/play_button.gd" id="1_qi5ut"]
+
+[node name="PlayButton" type="Node2D"]
+script = ExtResource("1_qi5ut")
+
+[node name="Button" type="Button" parent="."]
+unique_name_in_owner = true
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_font_sizes/font_size = 51
+text = "Play cards"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

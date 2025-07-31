@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjf684cb746yx"]
+
+[ext_resource type="Texture2D" uid="uid://cefc5wfl2q27e" path="res://sprites/portraits/player.png" id="1_df4ob"]
+[ext_resource type="Script" uid="uid://dx3hky324sbpv" path="res://objects/portraits/portrait.gd" id="2_xn7i0"]
+
+[node name="Portrait" type="Sprite2D"]
+texture = ExtResource("1_df4ob")
+script = ExtResource("2_xn7i0")
+
+[node name="Name" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -100.0
+offset_top = 90.0
+offset_right = 100.0
+offset_bottom = 113.0
+text = "Name name"
+horizontal_alignment = 1
+
+[node name="Health" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -100.0
+offset_top = 118.96
+offset_right = 100.0
+offset_bottom = 141.96
+text = "Health"
+horizontal_alignment = 1

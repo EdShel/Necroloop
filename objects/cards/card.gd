@@ -17,7 +17,7 @@ func _ready() -> void:
 	%Text.text = data.text
 	%Graphics.texture = load("res://sprites/card_graphics/%s.png" % data.id)
 
-func _on_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if belongs_to_enemy:
 		return
 	

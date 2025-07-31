@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://7w3a71cmmgg4"]
+
+[ext_resource type="Script" uid="uid://3uy7js50crr4" path="res://objects/autoloads/bus.gd" id="1_q7ifj"]
+
+[node name="Bus" type="Node"]
+script = ExtResource("1_q7ifj")
