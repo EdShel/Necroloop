@@ -1,7 +1,8 @@
 extends Sprite2D
 class_name Card
 
-const Z_INDEX_DRAG = 3
+const Z_INDEX_DRAG = 4
+const Z_INDEX_DRAG_SCRIPTED = 3
 const Z_INDEX_ACTIVE = 2
 const Z_INDEX_INACTIVE = 1
 
@@ -9,9 +10,14 @@ var drag_offset: Vector2 = Vector2.INF
 
 func _on_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
-		if not (z_index == Z_INDEX_ACTIVE || z_index == Z_INDEX_DRAG):
+		if not (z_index == Z_INDEX_ACTIVE || z_index == Z_INDEX_DRAG || get_parent() is CardSlot):
 			return
+		var is_dragging_another_card = get_tree().get_nodes_in_group("card").any(func(x: Card): return x != self and x.is_dragged())
+		if is_dragging_another_card:
+			return
+			
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			get_viewport().set_input_as_handled()
 			if drag_offset == Vector2.INF:
 				drag_offset = global_position - event.position
 				z_index = Z_INDEX_DRAG
@@ -51,6 +57,16 @@ func _release_card() -> void:
 		elif new_parent is Hand:
 			new_parent.arrange_cards()
 	)
+	
+	if new_parent is CardSlot and new_parent.get_child_count() > 0:
+		for existing_card in new_parent.get_children():
+			existing_card.z_index = Z_INDEX_DRAG_SCRIPTED
+			existing_card.reparent(prev_parent, true)
+			var swap_tween = get_tree().create_tween()
+			swap_tween.tween_property(existing_card, "global_position", prev_parent.global_position, 0.1)
+			swap_tween.tween_callback(func() -> void:
+				z_index = Z_INDEX_INACTIVE
+			)
 	
 	self.reparent(new_parent, true)
 
