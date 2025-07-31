@@ -60,6 +60,9 @@ func _input(event: InputEvent) -> void:
 				hovered_card_index = i
 			else:
 				break
+		if abs(offsets[hovered_card_index] - mouse_relative.x) > card_width:
+			hovered_card_index = -1
+		
 		_highlight_hovered_card(hovered_card_index)
 			
 func _highlight_hovered_card(hovered_card_index: int) -> void:
