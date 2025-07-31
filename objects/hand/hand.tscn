@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6niequrehxah"]
+
+[ext_resource type="Script" uid="uid://dpf47xaypjnl6" path="res://objects/hand/hand.gd" id="1_4c52c"]
+
+[node name="Hand" type="Node2D" groups=["hand"]]
+script = ExtResource("1_4c52c")
+container_width = 640.0
+cards_count = 7

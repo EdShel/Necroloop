@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwopxsf733vi2"]
+
+[ext_resource type="Texture2D" uid="uid://c2vqbv7u0f43t" path="res://sprites/card_slot.png" id="1_4p01y"]
+[ext_resource type="Script" uid="uid://blv3vkoxh0vvt" path="res://objects/table/card_slot.gd" id="2_t8p31"]
+
+[node name="CardSlot" type="Sprite2D" groups=["card_slot"]]
+z_index = -1
+texture = ExtResource("1_4p01y")
+script = ExtResource("2_t8p31")
