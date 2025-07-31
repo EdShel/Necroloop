@@ -1,0 +1,44 @@
+extends PanelContainer
+class_name MyPopup
+
+signal closed(result: Dictionary)
+
+var _is_closing: bool = false
+
+var title_text: String:
+	set(value): %Title.text = value
+	get: return %Title.text
+var message_text: String:
+	set(value): %Message.text = value
+	get: return %Message.text
+
+func _on_cancel_button_pressed() -> void:
+	_is_closing = true
+	closed.emit({})
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.keycode == KEY_ESCAPE:
+			closed.emit({})
+			get_viewport().set_input_as_handled()
+
+
+func _on_close_icon_mouse_entered() -> void:
+	if _is_closing or not %CloseIcon:
+		return
+	var tween = create_tween()
+	tween.tween_property(%CloseIcon, "modulate", Color(0.7, 0.7, 0.7, 1.0), 0.2)
+
+
+func _on_close_icon_mouse_exited() -> void:
+	if _is_closing or not %CloseIcon:
+		return
+	var tween = create_tween()
+	tween.tween_property(%CloseIcon, "modulate", Color.WHITE, 0.2)
+
+
+func _on_close_icon_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		_is_closing = true
+		closed.emit({})
+		get_viewport().set_input_as_handled()

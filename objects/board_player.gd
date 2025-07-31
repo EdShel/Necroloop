@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 func _process_next_card() -> void:
 	_hide_flame_from_previous_card()
 	
-	while (loop_index < 100):
+	while (loop_index < 40):
 		var next_card: Card
 		if _next_turn_is_player:
 			next_card = board.get_player_table_card(_next_card_index)

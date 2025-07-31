@@ -9,11 +9,31 @@ func _ready() -> void:
 	Bus.battle_win.connect(func():
 		_board_player.queue_free()
 		_board_player = null
+		
+		var popup = preload("res://objects/ui/popup/my_popup.tscn").instantiate()
+		popup.title_text = "Foe defeated"
+		popup.message_text = "Brilliant planning! Wait, who's lurking out there in the shadows?"
+		get_tree().root.add_child(popup)
+		await popup.closed
+		popup.queue_free()
+		
 		Bus.reset_player.emit()
 	)
-	Bus.battle_defeat.connect(func(_reason):
+	Bus.battle_defeat.connect(func(reason):
 		_board_player.queue_free()
 		_board_player = null
+		
+		var popup = preload("res://objects/ui/popup/my_popup.tscn").instantiate()
+		popup.title_text = "This will not work"
+		match reason:
+			"dead": popup.message_text = "Your health was depleted"
+			"too_much_loops": popup.message_text = "This isn't going anywhere - there are too much loops"
+			"no_loop": popup.message_text = "You played all your cards but the enemy is still alive. Did you forget to place LOOP card?"
+			_: popup.message_text = "Try again"
+		get_tree().root.add_child(popup)
+		await popup.closed
+		popup.queue_free()
+		
 		Bus.reset_player.emit()
 	)
 
