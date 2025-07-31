@@ -75,6 +75,7 @@ position = Vector2(1050, 0)
 position = Vector2(1260, 0)
 
 [node name="Hand" parent="." instance=ExtResource("1_s2cr6")]
+unique_name_in_owner = true
 position = Vector2(450, 830)
 container_width = 1220.0
 
@@ -89,6 +90,7 @@ position = Vector2(1600, 920)
 position = Vector2(210, 500)
 
 [node name="EnemyPortrait" parent="." instance=ExtResource("6_xtn1n")]
+unique_name_in_owner = true
 position = Vector2(210, 200)
 id = "duck"
 

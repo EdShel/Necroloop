@@ -1,22 +1,42 @@
 extends Node2D
 class_name Board
 
+@export var encounter_index: int = 0
 var _board_player: BoardPlayer = null
 
+func _enter_tree() -> void:
+	_begin_encounter(EncountersData.get_data(encounter_index))
+
 func _ready() -> void:
-	_init_enemy_table(["regen", "regen"])
+	var initial_cards: Array[String] = ["attack", "attack", "attack"]
+	%Hand.add_cards(initial_cards)
 	
 	Bus.battle_win.connect(func():
 		_board_player.queue_free()
 		_board_player = null
 		
-		var popup = preload("res://objects/ui/popup/my_popup.tscn").instantiate()
-		popup.title_text = "Foe defeated"
-		popup.message_text = "Brilliant planning! Wait, who's lurking out there in the shadows?"
-		get_tree().root.add_child(popup)
-		await popup.closed
-		popup.queue_free()
+		var completed_encounter = EncountersData.get_data(encounter_index)
+		%Hand.add_cards(completed_encounter.reward_cards)
 		
+		var next_encounter = EncountersData.get_data(encounter_index + 1)
+		if not next_encounter:
+			var popup = preload("res://objects/ui/popup/my_popup.tscn").instantiate()
+			popup.title_text = "Victory"
+			popup.message_text = "You have defeated every enemy! You can continue playing though"
+			get_tree().root.add_child(popup)
+			await popup.closed
+			popup.queue_free()
+			encounter_index = 0
+		else:
+			var popup = preload("res://objects/ui/popup/my_popup.tscn").instantiate()
+			popup.title_text = "Foe defeated"
+			popup.message_text = "Brilliant planning! Wait, who's lurking out there in the shadows?"
+			get_tree().root.add_child(popup)
+			await popup.closed
+			popup.queue_free()
+			encounter_index += 1
+		
+		_begin_encounter(EncountersData.get_data(encounter_index))
 		Bus.reset_player.emit()
 	)
 	Bus.battle_defeat.connect(func(reason):
@@ -36,6 +56,10 @@ func _ready() -> void:
 		
 		Bus.reset_player.emit()
 	)
+	
+func _begin_encounter(data: EncountersData.EncounterMetadata) -> void:
+	%EnemyPortrait.set_enemy_encounter(data)
+	_init_enemy_table(data.cards)
 
 func _init_enemy_table(cards_ids: Array[String]) -> void:
 	for slot in %EnemyTable.get_children():
@@ -47,6 +71,8 @@ func _init_enemy_table(cards_ids: Array[String]) -> void:
 		var slot = %EnemyTable.get_child(i)
 		
 		var card_id = cards_ids[i]
+		if card_id.length() == 0:
+			continue
 		var card_scene = preload("res://objects/cards/card.tscn")
 		var card = card_scene.instantiate() as Card
 		card.id = card_id

@@ -10,8 +10,11 @@ func _ready() -> void:
 	for x in get_children():
 		remove_child(x)
 		x.queue_free()
+	arrange_cards()
+
+func add_cards(cards_ids: Array[String]) -> void:
 	var card_scene = preload("res://objects/cards/card.tscn")
-	for id in ["attack", "attack","attack","attack","attack","attack","attack","attack","attack", "regen", "loop"]:
+	for id in cards_ids:
 		var card = card_scene.instantiate()
 		card.id = id
 		add_child(card)
@@ -52,6 +55,9 @@ func _input(event: InputEvent) -> void:
 			return
 		
 		var cards_count = get_child_count()
+		if cards_count == 0:
+			return
+		
 		var offsets = _get_cards_x_offsets(cards_count)
 		var mouse_relative = mouse_pos - frame.position
 		var hovered_card_index = 0
