@@ -1,5 +1,3 @@
-@tool
-
 extends Node2D
 class_name Hand
 
@@ -7,21 +5,16 @@ class_name Hand
 @export var card_width: float = 200
 @export var card_height: float = 250
 @export var cards_gap: float = 10
-@export var cards_count: int:
-	set(value):
-		for x in get_children():
-			remove_child(x)
-			x.queue_free()
-		var card_scene = preload("res://objects/cards/card.tscn")
-		for i in range(0, value):
-			var card = card_scene.instantiate()
-			add_child(card)
-		arrange_cards()
-	get:
-		return get_child_count()
 
 func _ready() -> void:
-
+	for x in get_children():
+		remove_child(x)
+		x.queue_free()
+	var card_scene = preload("res://objects/cards/card.tscn")
+	for id in ["attack", "attack", "regen", "loop"]:
+		var card = card_scene.instantiate()
+		card.id = id
+		add_child(card)
 	arrange_cards()
 
 func arrange_cards() -> void:
@@ -71,7 +64,7 @@ func _input(event: InputEvent) -> void:
 			
 func _highlight_hovered_card(hovered_card_index: int) -> void:
 	var cards = get_children() as Array[Card]
-	for i in range(cards_count):
+	for i in range(cards.size()):
 		var card = cards[i]
 		if i == hovered_card_index:
 			card.z_index = Card.Z_INDEX_ACTIVE

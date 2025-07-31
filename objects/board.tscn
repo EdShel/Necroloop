@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://gpafxrx4i5wx"]
+[gd_scene load_steps=7 format=3 uid="uid://gpafxrx4i5wx"]
 
+[ext_resource type="PackedScene" uid="uid://b1kbi5lnjkpjg" path="res://objects/enemy/enemy_slot.tscn" id="1_liekj"]
 [ext_resource type="PackedScene" uid="uid://c6niequrehxah" path="res://objects/hand/hand.tscn" id="1_s2cr6"]
+[ext_resource type="Script" uid="uid://wdsjq6l5yne7" path="res://objects/board.gd" id="1_tyihr"]
 [ext_resource type="PackedScene" uid="uid://cwopxsf733vi2" path="res://objects/table/card_slot.tscn" id="2_s2cr6"]
 
 [sub_resource type="Gradient" id="Gradient_s2cr6"]
@@ -13,6 +15,7 @@ height = 10
 fill_to = Vector2(0, 1)
 
 [node name="Board" type="Node2D"]
+script = ExtResource("1_tyihr")
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -100
@@ -21,11 +24,29 @@ scale = Vector2(192, 108)
 texture = SubResource("GradientTexture2D_liekj")
 metadata/_edit_lock_ = true
 
-[node name="Hand" parent="." instance=ExtResource("1_s2cr6")]
-position = Vector2(200, 830)
-container_width = 1720.0
-card_height = 250.0
-cards_count = 16
+[node name="EnemyTable" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(200, 200)
+
+[node name="EnemySlot1" parent="EnemyTable" instance=ExtResource("1_liekj")]
+
+[node name="EnemySlot2" parent="EnemyTable" instance=ExtResource("1_liekj")]
+position = Vector2(210, 0)
+
+[node name="EnemySlot3" parent="EnemyTable" instance=ExtResource("1_liekj")]
+position = Vector2(420, 0)
+
+[node name="EnemySlot4" parent="EnemyTable" instance=ExtResource("1_liekj")]
+position = Vector2(630, 0)
+
+[node name="EnemySlot5" parent="EnemyTable" instance=ExtResource("1_liekj")]
+position = Vector2(840, 0)
+
+[node name="EnemySlot6" parent="EnemyTable" instance=ExtResource("1_liekj")]
+position = Vector2(1050, 0)
+
+[node name="EnemySlot7" parent="EnemyTable" instance=ExtResource("1_liekj")]
+position = Vector2(1260, 0)
 
 [node name="Table" type="Node2D" parent="."]
 position = Vector2(200, 500)
@@ -49,6 +70,10 @@ position = Vector2(1050, 0)
 
 [node name="Slot7" parent="Table" instance=ExtResource("2_s2cr6")]
 position = Vector2(1260, 0)
+
+[node name="Hand" parent="." instance=ExtResource("1_s2cr6")]
+position = Vector2(200, 830)
+container_width = 1720.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)

@@ -6,9 +6,21 @@ const Z_INDEX_DRAG_SCRIPTED = 3
 const Z_INDEX_ACTIVE = 2
 const Z_INDEX_INACTIVE = 1
 
+@export var id: String
+@export var belongs_to_enemy: bool = false
+
 var drag_offset: Vector2 = Vector2.INF
 
+func _ready() -> void:
+	var data = CardsData.get_data(id)
+	%Name.text = data.name
+	%Text.text = data.text
+	%Graphics.texture = load("res://sprites/card_graphics/%s.png" % data.id)
+
 func _on_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if belongs_to_enemy:
+		return
+	
 	if event is InputEventMouseButton:
 		if not (z_index == Z_INDEX_ACTIVE || z_index == Z_INDEX_DRAG || get_parent() is CardSlot):
 			return
@@ -26,6 +38,9 @@ func _on_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> 
 				_release_card()
 
 func _input(event: InputEvent) -> void:
+	if belongs_to_enemy:
+		return
+	
 	if event is InputEventMouseMotion:
 		if drag_offset == Vector2.INF:
 			return
@@ -66,6 +81,8 @@ func _release_card() -> void:
 			swap_tween.tween_property(existing_card, "global_position", prev_parent.global_position, 0.1)
 			swap_tween.tween_callback(func() -> void:
 				z_index = Z_INDEX_INACTIVE
+				if (prev_parent is Hand):
+					prev_parent.arrange_cards()
 			)
 	
 	self.reparent(new_parent, true)

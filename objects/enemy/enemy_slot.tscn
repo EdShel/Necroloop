@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1kbi5lnjkpjg"]
+
+[ext_resource type="Texture2D" uid="uid://c2vqbv7u0f43t" path="res://sprites/card_slot.png" id="1_h2qwk"]
+
+[node name="EnemySlot" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.184314)
+texture = ExtResource("1_h2qwk")
