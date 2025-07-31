@@ -10,6 +10,7 @@ const Z_INDEX_INACTIVE = 1
 @export var belongs_to_enemy: bool = false
 
 var drag_offset: Vector2 = Vector2.INF
+var _flame: Node2D = null
 
 func _ready() -> void:
 	var data = CardsData.get_data(id)
@@ -89,3 +90,19 @@ func _release_card() -> void:
 
 func is_dragged() -> bool:
 	return drag_offset != Vector2.INF
+
+func set_shining_enabled(value: bool) -> void:
+	if value and _flame:
+		return
+	if not value and not _flame:
+		return
+	
+	if value:
+		_flame = preload("res://objects/cards/flame.tscn").instantiate()
+		add_child(_flame)
+	else:
+		_flame.queue_free()
+		_flame = null
+
+func get_is_shining_enabled() -> bool:
+	return !!_flame;

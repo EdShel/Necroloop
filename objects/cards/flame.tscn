@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://c3scyn8oxtl8r"]
+
+[ext_resource type="Shader" uid="uid://cc8tx7dxt0b8d" path="res://objects/cards/flame.gdshader" id="1_48ln4"]
+[ext_resource type="Texture2D" uid="uid://dw25ysvbblm3l" path="res://sprites/card_frame.png" id="2_74mup"]
+[ext_resource type="Shader" uid="uid://bih7avmdfd0fg" path="res://objects/cards/outline.gdshader" id="3_74mup"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bbpfw"]
+frequency = 0.0794
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_bqtr4"]
+width = 128
+height = 128
+seamless = true
+noise = SubResource("FastNoiseLite_bbpfw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bqtr4"]
+shader = ExtResource("1_48ln4")
+shader_parameter/noise = SubResource("NoiseTexture3D_bqtr4")
+shader_parameter/smooth_border = 0.66
+shader_parameter/smooth_border_from = 1.0
+shader_parameter/color_a = Color(0.745098, 0.882353, 0.913725, 0.713726)
+shader_parameter/color_b = Color(0.644518, 0.761244, 0.997226, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rea4q"]
+shader = ExtResource("3_74mup")
+shader_parameter/outline_color = Color(0.644518, 0.761244, 0.997226, 1)
+
+[node name="Flame" type="Node2D"]
+z_index = -1
+
+[node name="Shine" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_bqtr4")
+scale = Vector2(1.375, 1.375)
+texture = ExtResource("2_74mup")
+
+[node name="Outline" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_rea4q")
+scale = Vector2(1.03, 1.03)
+texture = ExtResource("2_74mup")
