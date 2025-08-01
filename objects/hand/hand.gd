@@ -25,7 +25,7 @@ func arrange_cards() -> void:
 	var cards_count = cards.size()
 	var offsets = _get_cards_x_offsets(cards_count)
 	for i in range(cards_count):
-		cards[i].position.x = offsets[i]
+		cards[i].play_shift_to_new_position_in_hand(offsets[i])
 	_highlight_hovered_card(-1)
 
 func _get_cards_x_offsets(cards_count: int) -> Array[float]:
@@ -74,11 +74,23 @@ func _input(event: InputEvent) -> void:
 func _highlight_hovered_card(hovered_card_index: int) -> void:
 	var cards = get_children() as Array[Card]
 	for i in range(cards.size()):
-		var card = cards[i]
+		var card = cards[i] as Card
 		if i == hovered_card_index:
-			card.z_index = Card.Z_INDEX_ACTIVE
-			card.position.y = -10
+			card.play_hightlighted_animation()
 			continue
-		card.z_index = Card.Z_INDEX_INACTIVE
-		card.position.y = 0
+		card.play_unhighlight_animation()
 	
+func find_global_position_and_index_for_card(card: Card) -> Dictionary:
+	var cards_count = get_child_count()
+	if card.get_parent() == self:
+		var offsets = _get_cards_x_offsets(get_child_count())
+		var card_index = card.get_index()
+		return { "position": Vector2(position.x + offsets[card_index], position.y), "index": card_index }
+	
+	var offsets_if_card_is_added = _get_cards_x_offsets(cards_count + 1)
+	var card_ord = CardsData.get_ord(card.id)
+	for i in range(cards_count):
+		var card_in_hand_ord = CardsData.get_ord(get_child(i).id)
+		if card_in_hand_ord > card_ord:
+			return { "position": Vector2(position.x + offsets_if_card_is_added[i], position.y), "index": i }
+	return { "position": Vector2(position.x + offsets_if_card_is_added[-1], position.y), "index": cards_count }

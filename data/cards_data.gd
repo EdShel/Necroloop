@@ -32,12 +32,21 @@ static var cards: Array[CardMetadata] = [
 	),
 ]
 
+static var cards_ord: Dictionary[String, int] = {}
+
 static func get_data(card_id: String) -> CardMetadata:
 	for card in cards:
 		if card.id == card_id:
 			return card
 	assert(false, "Card wasn't found: " + card_id)
 	return null
+
+static func get_ord(card_id: String) -> int:
+	if cards_ord.is_empty():
+		for i in range(cards.size()):
+			cards_ord.set(cards[i].id, i)
+	return cards_ord[card_id]
+
 
 class CardMetadata:
 	var id: String

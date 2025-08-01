@@ -27,6 +27,8 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
 	_hide_flame_from_previous_card()
+	for number_vfx in get_tree().get_nodes_in_group("number_vfx"):
+		number_vfx.queue_free()
 
 func _process(delta: float) -> void:
 	if _is_finished:
