@@ -14,6 +14,10 @@ var drag_offset: Vector2 = Vector2.INF
 var _flame: Node2D = null
 var _locked: bool = false
 
+var _displacement: float = 0
+var _oscillator_velocity: float = 0
+var _last_position: Vector2 = Vector2.INF
+
 func _ready() -> void:
 	var data = CardsData.get_data(id)
 	%Name.text = data.name
@@ -28,6 +32,26 @@ func _ready() -> void:
 	Bus.battle_cancel.connect(func(): _locked = false)
 	Bus.battle_win.connect(func(): _locked = false)
 	Bus.battle_defeat.connect(func(_reason): _locked = false)
+
+func _process(delta: float) -> void:
+	if not is_dragged():
+		return
+	
+	if _last_position != Vector2.INF:
+		var velocity = (global_position - _last_position) / delta
+		_oscillator_velocity += velocity.normalized().x * 0.5
+		
+		const spring = 200.0
+		const damp = 10.0
+		var force = -spring * _displacement - damp * _oscillator_velocity
+		_oscillator_velocity += force * delta
+		_displacement += _oscillator_velocity * delta
+		
+		rotation = _displacement
+		
+		
+	_last_position = global_position
+	
 
 func _on_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if _is_interaction_disabled():
@@ -67,6 +91,7 @@ func _release_card(to_the_hand_only: bool) -> void:
 	var prev_parent = get_parent()
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "global_position", new_parent.global_position, 0.1)
+	tween.parallel().tween_property(self, "rotation", 0, 0.1)
 	tween.tween_callback(func() -> void:
 		z_index = Z_INDEX_INACTIVE
 		if prev_parent is Hand:
