@@ -22,6 +22,24 @@ static var encounters: Array[EncounterMetadata] = [
 		"cards": ["", "multi", "multi", "regen", "regen", "regen", ""],
 		"reward_cards": ["multi"],
 	}),
+	EncounterMetadata.new({
+		"enemy_id": "duck",
+		"enemy_name": "Dangerat",
+		"health": 700,
+		"cards": ["attack", "regen", "regen", "regen", "regen", "regen", "multi"],
+	}),
+	EncounterMetadata.new({
+		"enemy_id": "duck",
+		"enemy_name": "Baby cycloop",
+		"health": 500,
+		"cards": ["reverse", "reverse", "reverse", "reverse", "reverse", "", ""],
+	}),
+	EncounterMetadata.new({
+		"enemy_id": "duck",
+		"enemy_name": "Cycloop",
+		"health": 500,
+		"cards": ["reverse", "multi", "attack", "reverse", "multi", "attack", ""],
+	}),
 ]
 
 static func get_data(index: int) -> EncounterMetadata:

@@ -8,7 +8,8 @@ func _enter_tree() -> void:
 	_begin_encounter(EncountersData.get_data(encounter_index))
 
 func _ready() -> void:
-	var initial_cards: Array[String] = ["attack", "attack", "attack"]
+	#var initial_cards: Array[String] = ["attack", "attack", "attack"]
+	var initial_cards: Array[String] = ["attack", "attack", "attack", "multi", "loop", "reverse"]
 	%Hand.add_cards(initial_cards)
 	
 	Bus.battle_win.connect(func():
@@ -22,7 +23,7 @@ func _ready() -> void:
 		if not next_encounter:
 			var popup = preload("res://objects/ui/popup/my_popup.tscn").instantiate()
 			popup.title_text = "Victory"
-			popup.message_text = "You have defeated every enemy!\nIn the spirit of the game jam's theme 'LOOP', you can keep the cards and restart. Try beating enemies in less loops or cards!"
+			popup.message_text = "You have defeated every enemy!\nIn the spirit of the game jam's theme 'LOOP', you can keep the cards and restart.\nTry beating enemies in less loops or cards!"
 			get_tree().root.add_child(popup)
 			await popup.closed
 			popup.queue_free()
