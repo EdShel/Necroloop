@@ -39,6 +39,13 @@ static var encounters: Array[EncounterMetadata] = [
 		"enemy_name": "Cycloop",
 		"health": 500,
 		"cards": ["reverse", "multi", "attack", "reverse", "multi", "attack", ""],
+		"reward_cards": ["reverse"],
+	}),
+	EncounterMetadata.new({
+		"enemy_id": "duck",
+		"enemy_name": "Bee-Beep",
+		"health": 500,
+		"cards": ["multi", "attack", "loop", "", "", "", ""],
 	}),
 ]
 
