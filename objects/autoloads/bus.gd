@@ -6,3 +6,4 @@ signal reset_player()
 
 signal battle_win()
 signal battle_defeat(reason: String)
+signal battle_cancel()

@@ -56,6 +56,12 @@ func _ready() -> void:
 		
 		Bus.reset_player.emit()
 	)
+	Bus.battle_cancel.connect(func():
+		_board_player.queue_free()
+		_board_player = null
+		
+		Bus.reset_player.emit()
+	)
 	
 func _begin_encounter(data: EncountersData.EncounterMetadata) -> void:
 	%EnemyPortrait.set_enemy_encounter(data)
@@ -81,7 +87,10 @@ func _init_enemy_table(cards_ids: Array[String]) -> void:
 
 func _on_play_button_clicked() -> void:
 	if _board_player:
+		Bus.battle_cancel.emit()
 		return
+	%PlayButton.toggle_state("pause")
+	
 	_board_player = preload("res://objects/board_player.tscn").instantiate()
 	add_child(_board_player)
 
