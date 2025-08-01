@@ -28,7 +28,7 @@ metadata/_edit_lock_ = true
 
 [node name="EnemyTable" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(450, 200)
+position = Vector2(420, 200)
 
 [node name="EnemySlot1" parent="EnemyTable" instance=ExtResource("1_liekj")]
 
@@ -52,7 +52,7 @@ position = Vector2(1260, 0)
 
 [node name="Table" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(450, 500)
+position = Vector2(520, 500)
 
 [node name="Slot1" parent="Table" instance=ExtResource("2_s2cr6")]
 
@@ -87,11 +87,11 @@ unique_name_in_owner = true
 position = Vector2(1600, 920)
 
 [node name="PlayerPortrait" parent="." instance=ExtResource("6_xtn1n")]
-position = Vector2(210, 500)
+position = Vector2(200, 500)
 
 [node name="EnemyPortrait" parent="." instance=ExtResource("6_xtn1n")]
 unique_name_in_owner = true
-position = Vector2(210, 200)
+position = Vector2(200, 200)
 id = "duck"
 
 [connection signal="clicked" from="PlayButton" to="." method="_on_play_button_clicked"]

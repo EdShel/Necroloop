@@ -130,9 +130,9 @@ func _advance_to_next_slot() -> void:
 		Bus.battle_defeat.emit("no_loop")
 
 func _get_card_delay(loop_index: int) -> float:
-	if (loop_index <= 0): return 1.2
-	if (loop_index == 1): return 0.5
-	if (loop_index == 2): return 0.2
+	if (loop_index <= 0): return 1.4
+	if (loop_index == 1): return 0.9
+	if (loop_index == 2): return 0.3
 	if (loop_index == 3): return 0.05
 	# Don't know how i feel about this
 	#if (loop_index == 47): return 0.15
