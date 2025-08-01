@@ -30,6 +30,7 @@ window/stretch/mode="viewport"
 card_slot=""
 hand=""
 card=""
+number_vfx=""
 
 [rendering]
 

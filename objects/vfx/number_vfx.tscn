@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnajkpr2a74xq"]
+
+[ext_resource type="FontFile" uid="uid://ckumvhk0tol5l" path="res://style/coiny.woff2" id="1_ced5k"]
+[ext_resource type="Script" uid="uid://cqtr0h51qscue" path="res://objects/vfx/number_vfx.gd" id="2_vskpl"]
+
+[node name="NumberVFX" type="Node2D" groups=["number_vfx"]]
+script = ExtResource("2_vskpl")
+
+[node name="Label" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -55.0
+offset_right = 250.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_ced5k")
+theme_override_font_sizes/normal_font_size = 45
+bbcode_enabled = true
+text = "[wave amp=50.0 freq=5.0]100x"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+meta_underlined = false
+hint_underlined = false

@@ -1,6 +1,7 @@
 extends Sprite2D
 class_name Card
 
+const Z_INDEX_NUMBER_VFX = 5
 const Z_INDEX_DRAG = 4
 const Z_INDEX_DRAG_SCRIPTED = 3
 const Z_INDEX_ACTIVE = 2

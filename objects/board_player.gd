@@ -34,9 +34,7 @@ func _process(delta: float) -> void:
 	_timer -= delta
 	if _timer <= 0:
 		_process_next_card()
-		var loop_delays = [0.3, 0.2, 0.1, 0.05]
-		var delay_index = min(loop_delays.size() - 1, loop_index)
-		_timer = loop_delays[delay_index]
+		_timer = _get_card_delay(loop_index)
 
 func _process_next_card() -> void:
 	_hide_flame_from_previous_card()
@@ -68,19 +66,31 @@ func _play_card(card: Card, is_player: bool) -> void:
 	var card_meta = CardsData.get_data(card.id)
 	match card_meta.id:
 		"attack":
-			Bus.portrait_damaged.emit(card_meta.get_amount() * multiplier, !is_player)
+			var damage_amount = card_meta.get_amount() * multiplier
+			Bus.portrait_damaged.emit(damage_amount, !is_player)
+			_spawn_or_update_number_vfx(card.global_position, "-%dHP", damage_amount, "increment")
 			_advance_to_next_slot()
+			
 		"regen":
-			Bus.portrait_damaged.emit(-card_meta.get_amount() * multiplier, is_player)
+			var heal_amount = card_meta.get_amount() * multiplier
+			Bus.portrait_damaged.emit(-heal_amount, is_player)
+			_spawn_or_update_number_vfx(card.global_position, "+%dHP", heal_amount, "increment")
 			_advance_to_next_slot()
 		"multi":
 			if !last_player_card || last_player_card.id != "attack":
-				_accumulated_multipliers[is_player] = card_meta.get_amount() * multiplier
+				var new_multi = card_meta.get_amount() * multiplier
+				_accumulated_multipliers[is_player] = new_multi
+				_spawn_or_update_number_vfx(card.global_position, "%dx", new_multi, "replace")
+			else:
+				_spawn_or_update_number_vfx(card.global_position, "-", 1, "replace")
+				
 			_advance_to_next_slot()
 		"loop":
 			_next_card_index = 0
 			_next_turn_is_player = false
 			loop_index += 1
+			_spawn_or_update_number_vfx(card.global_position, "Loop #%d", loop_index, "replace")
+			
 	
 	if card_meta.id != "multi":
 		_accumulated_multipliers[is_player] = 1
@@ -99,6 +109,33 @@ func _advance_to_next_slot() -> void:
 		_is_finished = true
 		Bus.battle_defeat.emit("no_loop")
 
+func _get_card_delay(loop_index: int) -> float:
+	if (loop_index <= 0): return 0.3
+	if (loop_index == 1): return 0.2
+	if (loop_index == 2): return 0.1
+	if (loop_index == 3): return 0.05
+	return 0.025
+
 func _hide_flame_from_previous_card() -> void:
 	for card in get_tree().get_nodes_in_group("card") as Array[Card]:
 		card.set_shining_enabled(false)
+
+func _spawn_or_update_number_vfx(number_position: Vector2, format: String, value: int, op: String) -> void:
+	var numbers = get_tree().get_nodes_in_group("number_vfx") as Array[NumberVFX]
+	var number_vfx_index = numbers.find_custom(func(n: NumberVFX):
+		return n.global_position == number_position and n.format == format
+	)
+	var number_vfx: NumberVFX = null
+	if number_vfx_index != -1:
+		number_vfx = numbers[number_vfx_index]
+		if (op == "increment"): number_vfx.value += value
+		if (op == "replace"): number_vfx.value = value
+	else:
+		var number_vfx_scene = preload("res://objects/vfx/number_vfx.tscn")
+		number_vfx = number_vfx_scene.instantiate()
+		number_vfx.global_position = number_position
+		number_vfx.format = format
+		number_vfx.value = value
+		board.add_child(number_vfx)
+		
+	number_vfx.invalidate_text()
