@@ -44,7 +44,7 @@ static var encounters: Array[EncounterMetadata] = [
 	EncounterMetadata.new({
 		"enemy_id": "duck",
 		"enemy_name": "Bee-Beep",
-		"health": 500,
+		"health": 1000,
 		"cards": ["multi", "attack", "loop", "", "", "", ""],
 	}),
 ]

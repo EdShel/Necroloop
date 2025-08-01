@@ -18,10 +18,10 @@ func _ready() -> void:
 		_is_finished = true
 		
 		if is_player:
-			await get_tree().create_timer(0.3).timeout
+			await get_tree().create_timer(2.0).timeout
 			Bus.battle_defeat.emit("dead")
 		else:
-			await get_tree().create_timer(0.3).timeout
+			await get_tree().create_timer(2.0).timeout
 			Bus.battle_win.emit()
 	)
 
@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 func _process_next_card() -> void:
 	_hide_flame_from_previous_card()
 	
-	while (loop_index < 40):
+	while (loop_index < 50):
 		var next_card: Card
 		if _next_turn_is_player:
 			next_card = board.get_player_table_card(_next_card_index)
@@ -130,10 +130,14 @@ func _advance_to_next_slot() -> void:
 		Bus.battle_defeat.emit("no_loop")
 
 func _get_card_delay(loop_index: int) -> float:
-	if (loop_index <= 0): return 0.3
-	if (loop_index == 1): return 0.2
-	if (loop_index == 2): return 0.1
+	if (loop_index <= 0): return 1.2
+	if (loop_index == 1): return 0.5
+	if (loop_index == 2): return 0.2
 	if (loop_index == 3): return 0.05
+	# Don't know how i feel about this
+	#if (loop_index == 47): return 0.15
+	#if (loop_index == 48): return 0.2
+	#if (loop_index == 49): return 0.4
 	return 0.025
 
 func _hide_flame_from_previous_card() -> void:
