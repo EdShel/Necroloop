@@ -93,6 +93,7 @@ func _on_play_button_clicked() -> void:
 	
 	_board_player = preload("res://objects/board_player.tscn").instantiate()
 	add_child(_board_player)
+	Bus.battle_begin.emit()
 
 func get_player_table_card(index: int) -> Card:
 	var slot = %Table.get_child(index)
