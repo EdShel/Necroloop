@@ -8,8 +8,8 @@ func _enter_tree() -> void:
 	_begin_encounter(EncountersData.get_data(encounter_index))
 
 func _ready() -> void:
-	#var initial_cards: Array[String] = ["attack", "attack", "attack"]
-	var initial_cards: Array[String] = ["attack", "attack", "attack", "multi", "loop", "reverse"]
+	var initial_cards: Array[String] = ["attack", "attack", "attack"]
+	#var initial_cards: Array[String] = ["attack", "attack", "attack", "multi", "loop", "reverse"]
 	%Hand.add_cards(initial_cards)
 	
 	Bus.battle_win.connect(func():
@@ -123,10 +123,13 @@ func _generate_lich_cards() -> Array[String]:
 		var player_card = get_player_table_card(i)
 		if not player_card:
 			result.push_back("regen")
+			
 		elif player_card.id == "attack":
 			result.push_back("reverse")
+			
 		elif player_card.id == "multi":
-			result.push_back("")
+			result.push_back("reverse")
+			
 		else:
 			result.push_back("regen")
 	

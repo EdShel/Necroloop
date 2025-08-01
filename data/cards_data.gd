@@ -23,7 +23,7 @@ static var cards: Array[CardMetadata] = [
 	CardMetadata.new(
 		"reverse",
 		"Reverse",
-		"The next card is played on this card caster's behalf",
+		"The next card is played in favor of the caster",
 	),
 	CardMetadata.new(
 		"loop",

@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://bjf684cb746yx"]
+[gd_scene load_steps=8 format=3 uid="uid://bjf684cb746yx"]
 
 [ext_resource type="Texture2D" uid="uid://cefc5wfl2q27e" path="res://sprites/portraits/player.png" id="1_df4ob"]
 [ext_resource type="Texture2D" uid="uid://daok4d3k232h" path="res://sprites/portraits/player_background.png" id="2_tsp2v"]
 [ext_resource type="Script" uid="uid://dx3hky324sbpv" path="res://objects/portraits/portrait.gd" id="2_xn7i0"]
 [ext_resource type="FontFile" uid="uid://ckumvhk0tol5l" path="res://style/coiny.woff2" id="3_everq"]
 [ext_resource type="Texture2D" uid="uid://c2y2vck47js6n" path="res://sprites/portraits/player_frame.png" id="4_08jma"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tsp2v"]
+font_size = 22
 
 [sub_resource type="LabelSettings" id="LabelSettings_viq1o"]
 font = ExtResource("3_everq")
@@ -28,10 +31,11 @@ texture = ExtResource("4_08jma")
 [node name="Name" type="Label" parent="."]
 unique_name_in_owner = true
 offset_left = -100.0
-offset_top = 87.0
+offset_top = 82.0
 offset_right = 100.0
 offset_bottom = 110.0
 text = "Name name"
+label_settings = SubResource("LabelSettings_tsp2v")
 horizontal_alignment = 1
 
 [node name="Health" type="Label" parent="."]

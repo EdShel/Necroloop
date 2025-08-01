@@ -71,16 +71,17 @@ func _play_card(card: Card, is_player: bool) -> void:
 	var multiplier = _accumulated_multipliers[is_player]
 	var last_player_card = _last_played_cards[is_player]
 	
+	var is_playing_for_player = is_player
 	var number_look = {}
 	if _next_card_caster_is == "player":
 		if not is_player:
 			number_look = { "reverse": "player" }
-		is_player = true
+		is_playing_for_player = true
 		_next_card_caster_is = ""
 	elif _next_card_caster_is == "enemy":
 		if is_player:
 			number_look = { "reverse": "enemy" }
-		is_player = false
+		is_playing_for_player = false
 		_next_card_caster_is = ""
 		
 		
@@ -88,25 +89,25 @@ func _play_card(card: Card, is_player: bool) -> void:
 	match card_meta.id:
 		"attack":
 			var damage_amount = card_meta.get_amount() * multiplier
-			Bus.portrait_damaged.emit(damage_amount, !is_player)
+			Bus.portrait_damaged.emit(damage_amount, !is_playing_for_player)
 			_spawn_or_update_number_vfx(card.global_position, "-%dHP", damage_amount, "increment", number_look)
 			_advance_to_next_slot()
 		"regen":
 			var heal_amount = card_meta.get_amount() * multiplier
-			Bus.portrait_damaged.emit(-heal_amount, is_player)
+			Bus.portrait_damaged.emit(-heal_amount, is_playing_for_player)
 			_spawn_or_update_number_vfx(card.global_position, "+%dHP", heal_amount, "increment", number_look)
 			_advance_to_next_slot()
 		"multi":
 			if !last_player_card || last_player_card.id != "attack":
 				var new_multi = card_meta.get_amount() * multiplier
-				_accumulated_multipliers[is_player] = new_multi
+				_accumulated_multipliers[is_playing_for_player] = new_multi
 				_spawn_or_update_number_vfx(card.global_position, "%dx", new_multi, "replace", number_look)
 			else:
 				_spawn_or_update_number_vfx(card.global_position, "-", 1, "replace", number_look)
 				
 			_advance_to_next_slot()
 		"reverse":
-			if is_player:
+			if is_playing_for_player:
 				_next_card_caster_is = "player"
 			else:
 				_next_card_caster_is = "enemy"
@@ -120,7 +121,7 @@ func _play_card(card: Card, is_player: bool) -> void:
 			
 	
 	if card_meta.id != "multi":
-		_accumulated_multipliers[is_player] = 1
+		_accumulated_multipliers[is_playing_for_player] = 1
 	
 	_last_played_cards[is_player] = card_meta
 	
