@@ -56,7 +56,7 @@ func _process(delta: float) -> void:
 	_last_position = global_position
 	
 
-func _on_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+func _on_area_input_event(viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if _is_interaction_disabled():
 		return
 	
@@ -68,13 +68,19 @@ func _on_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -
 			return
 			
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			get_viewport().set_input_as_handled()
-			if drag_offset == Vector2.INF:
+			viewport.set_input_as_handled()
+			if !is_dragged():
 				drag_offset = global_position - event.position
 				z_index = Z_INDEX_DRAG
 			else:
 				drag_offset = Vector2.INF
 				_release_card(false)
+		elif event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+			if is_dragged():
+				viewport.set_input_as_handled()
+				drag_offset = Vector2.INF
+				_release_card(true)
+			
 
 func _input(event: InputEvent) -> void:
 	if _is_interaction_disabled():
@@ -106,7 +112,7 @@ func _release_card(to_the_hand_only: bool) -> void:
 	)
 	
 	var existing_card_to_move_into_hand: Card = null
-	if new_parent is CardSlot and new_parent.get_child_count() > 0:
+	if new_parent is CardSlot and new_parent.get_child_count() > 0 and new_parent != prev_parent:
 		var existing_card: Card = new_parent.get_child(0)
 		if prev_parent is CardSlot:
 			existing_card.reparent(prev_parent, true)
@@ -120,7 +126,7 @@ func _release_card(to_the_hand_only: bool) -> void:
 			)
 			swap_tween.tween_property(existing_card, "rotation", 0, 0.1)
 		else:
-			existing_card_to_move_into_hand = new_parent
+			existing_card_to_move_into_hand = existing_card
 	
 	self.reparent(new_parent, true)
 	if preferred_index_in_parent != -1:

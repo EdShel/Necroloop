@@ -35,6 +35,10 @@ func _process(delta: float) -> void:
 		return
 		
 	_timer -= delta
+	
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+		_timer -= delta * 3.0
+	
 	if _timer <= 0:
 		_process_next_card()
 		_timer = _get_card_delay(loop_index)

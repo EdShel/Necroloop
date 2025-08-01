@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Node2D
 class_name Portrait
 
 @export var health: int = 100
@@ -39,9 +39,11 @@ func _restore_everything() -> void:
 	else:
 		set_name_label(_encounter.enemy_name)
 		health = _encounter.health
+		%Background.texture = preload("res://sprites/portraits/enemy_background.png")
+		%Frame.texture = preload("res://sprites/portraits/enemy_frame.png")
 	
 	_redraw_health()
-	texture = load("res://sprites/portraits/%s.png" % id)
+	%Face.texture = load("res://sprites/portraits/%s.png" % id)
 	
 	if _tween:
 		_tween.kill()

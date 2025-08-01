@@ -10,14 +10,14 @@ static var encounters: Array[EncounterMetadata] = [
 		"reward_cards": ["loop"],
 	}),
 	EncounterMetadata.new({
-		"enemy_id": "duck",
-		"enemy_name": "Alpha sapwing",
+		"enemy_id": "ladybug",
+		"enemy_name": "Ladylook",
 		"health": 500,
 		"cards": ["regen", "regen"],
 	}),
 	EncounterMetadata.new({
-		"enemy_id": "duck",
-		"enemy_name": "Omicron sapwing",
+		"enemy_id": "ladybug2",
+		"enemy_name": "Sirlook",
 		"health": 500,
 		"cards": ["", "multi", "multi", "regen", "regen", "regen", ""],
 		"reward_cards": ["multi"],
@@ -30,7 +30,7 @@ static var encounters: Array[EncounterMetadata] = [
 	}),
 	EncounterMetadata.new({
 		"enemy_id": "duck",
-		"enemy_name": "Baby cycloop",
+		"enemy_name": "Mimic",
 		"health": 500,
 		"cards": ["reverse", "reverse", "reverse", "reverse", "reverse", "", ""],
 	}),
