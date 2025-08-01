@@ -32,6 +32,10 @@ hand=""
 card=""
 number_vfx=""
 
+[gui]
+
+theme/custom_font="uid://co6duxgsdp1rc"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
