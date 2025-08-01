@@ -3,6 +3,12 @@ class_name EncountersData
 
 static var encounters: Array[EncounterMetadata] = [
 	EncounterMetadata.new({
+		"enemy_id": "lich",
+		"enemy_name": "Lich",
+		"health": 1000,
+		"cards": ["", "", "", "", "", "", ""],
+	}),
+	EncounterMetadata.new({
 		"enemy_id": "duck",
 		"enemy_name": "Sapwing",
 		"health": 300,

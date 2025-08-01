@@ -8,8 +8,8 @@ func _enter_tree() -> void:
 	_begin_encounter(EncountersData.get_data(encounter_index))
 
 func _ready() -> void:
-	var initial_cards: Array[String] = ["attack", "attack", "attack"]
-	#var initial_cards: Array[String] = ["attack", "attack", "attack", "multi", "loop", "reverse"]
+	#var initial_cards: Array[String] = ["attack", "attack", "attack"]
+	var initial_cards: Array[String] = ["attack", "attack", "attack", "multi", "loop", "reverse"]
 	%Hand.add_cards(initial_cards)
 	
 	Bus.battle_win.connect(func():
@@ -92,6 +92,11 @@ func _on_play_button_clicked() -> void:
 		return
 	%PlayButton.toggle_state("pause")
 	
+	var encounter = EncountersData.get_data(encounter_index)
+	if encounter.enemy_id == "lich":
+		var lich_cards = _generate_lich_cards()
+		_init_enemy_table(lich_cards)
+	
 	_board_player = preload("res://objects/board_player.tscn").instantiate()
 	add_child(_board_player)
 	Bus.battle_begin.emit()
@@ -111,3 +116,26 @@ func get_enemy_table_card(index: int) -> Card:
 
 func get_slots_count() -> int:
 	return %Table.get_child_count()
+
+func _generate_lich_cards() -> Array[String]:
+	var result: Array[String] = []
+	for i in range(get_slots_count()):
+		var player_card = get_player_table_card(i)
+		if not player_card:
+			result.push_back("regen")
+		elif player_card.id == "attack":
+			result.push_back("reverse")
+		elif player_card.id == "multi":
+			result.push_back("")
+		else:
+			result.push_back("regen")
+	
+	for i in range(get_slots_count() - 1):
+		var player_card = get_player_table_card(i)
+		if player_card and player_card.id == "reverse":
+			result[i] = "multi"
+			result[i + 1] = "attack"
+			
+	
+	return result
+		
