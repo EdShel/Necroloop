@@ -17,7 +17,11 @@ func _ready() -> void:
 		_board_player = null
 		
 		var completed_encounter = EncountersData.get_data(encounter_index)
-		%Hand.add_cards(completed_encounter.reward_cards)
+		var rewards: Array[String] = completed_encounter.reward_cards
+		var loop_card_exists = get_tree().get_nodes_in_group("card").any(func(c: Card): return c.id == "loop")
+		if loop_card_exists:
+			rewards = rewards.filter(func(c: String): return c != "loop")
+		%Hand.add_cards(rewards)
 		
 		var next_encounter = EncountersData.get_data(encounter_index + 1)
 		if not next_encounter:
@@ -150,3 +154,10 @@ func _generate_lich_cards() -> Array[String]:
 			
 	
 	return result
+
+
+func _on_hint_button_clicked() -> void:
+	if _board_player:
+		return
+	
+	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://gpafxrx4i5wx"]
+[gd_scene load_steps=12 format=3 uid="uid://gpafxrx4i5wx"]
 
 [ext_resource type="PackedScene" uid="uid://b1kbi5lnjkpjg" path="res://objects/enemy/enemy_slot.tscn" id="1_liekj"]
 [ext_resource type="PackedScene" uid="uid://c6niequrehxah" path="res://objects/hand/hand.tscn" id="1_s2cr6"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b6c1xu5i60nl7" path="res://objects/ui/game/play_button.tscn" id="5_mumcj"]
 [ext_resource type="PackedScene" uid="uid://bjf684cb746yx" path="res://objects/portraits/portrait.tscn" id="6_xtn1n"]
 [ext_resource type="PackedScene" uid="uid://qg4ck2ldqxyd" path="res://objects/ui/game/tip.tscn" id="8_u5e2k"]
+[ext_resource type="PackedScene" uid="uid://bnhv7sl8m6s2o" path="res://objects/ui/game/hint_button.tscn" id="9_p1kro"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u5e2k"]
 shader = ExtResource("2_sm4o3")
@@ -102,13 +103,8 @@ id = "duck"
 [node name="Tip" parent="." instance=ExtResource("8_u5e2k")]
 position = Vector2(960, 1046)
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="HintButton" parent="." instance=ExtResource("9_p1kro")]
 position = Vector2(1690, 715.155)
 
-[node name="Button" type="Button" parent="Node2D"]
-offset_right = 100.0
-offset_bottom = 38.0
-focus_mode = 0
-text = "See hint"
-
 [connection signal="clicked" from="PlayButton" to="." method="_on_play_button_clicked"]
+[connection signal="clicked" from="HintButton" to="." method="_on_hint_button_clicked"]
