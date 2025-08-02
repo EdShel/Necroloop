@@ -8,7 +8,7 @@ static var encounters: Array[EncounterMetadata] = [
 		"health": 300,
 		"cards": [],
 		"reward_cards": ["loop"],
-		"hint": "Try dragging some cards into the highlighted areas",
+		"hint": "Try dragging some cards into the dashed areas",
 		"solution_cards": ["attack", "attack", "attack"],
 	}),
 	EncounterMetadata.new({
@@ -25,7 +25,7 @@ static var encounters: Array[EncounterMetadata] = [
 		"health": 500,
 		"cards": ["", "multi", "multi", "regen", "regen", "regen", ""],
 		"reward_cards": ["multi"],
-		"hint": "This enemy will regenerate more than any of your attacks can outdamage!\nLook carefully at the second property of the 'Loop' card.",
+		"hint": "This enemy will regenerate more health than all your attacks combined can damage!\nLook carefully at the second property of the 'Loop' card.",
 		"solution_cards": ["attack", "attack", "loop", "", "", "", ""],
 	}),
 	EncounterMetadata.new({
@@ -43,7 +43,7 @@ static var encounters: Array[EncounterMetadata] = [
 		"health": 500,
 		"cards": ["reverse", "reverse", "reverse", "reverse", "reverse", "", ""],
 		"reward_cards": ["reverse"],
-		"hint": "Put your damaging card at the end of the loop.\nNeed to somehow neutralize their last 'Reverse' card though",
+		"hint": "Put your damaging card at the end of the loop.\nNeed to somehow neutralize the last 'Reverse' card though",
 		"solution_cards": ["", "", "", "", "multi", "attack", "loop"],
 	}),
 	EncounterMetadata.new({
@@ -59,7 +59,7 @@ static var encounters: Array[EncounterMetadata] = [
 		"enemy_name": "Cycloop",
 		"health": 800,
 		"cards": ["attack", "reverse", "attack", "", "reverse", "multi", "attack"],
-		"hint": "If you don't put any card after the enemy's reverse,\nthen that card will be neutralized by their own card.",
+		"hint": "If you don't put any card after the enemy's 'Reverse',\nthen it will be neutralized by their own card.",
 		"solution_cards": ["multi", "", "attack", "loop", "", "", ""],
 	}),
 	EncounterMetadata.new({
@@ -83,6 +83,8 @@ class EncounterMetadata:
 	var health: int
 	var cards: Array[String]
 	var reward_cards: Array[String]
+	var hint: String
+	var solution_cards: Array[String]
 	
 	func _init(d: Dictionary) -> void:
 		self.enemy_id = d["enemy_id"]
@@ -93,6 +95,9 @@ class EncounterMetadata:
 			self.reward_cards = _untyped_array_to_string_array(d["reward_cards"])
 		else:
 			self.reward_cards = []
+		self.hint = d["hint"]
+		self.solution_cards = _untyped_array_to_string_array(d["solution_cards"])
+		
 	
 	static func _untyped_array_to_string_array(ar: Array) -> Array[String]:
 		var result: Array[String] = []

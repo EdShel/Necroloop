@@ -162,4 +162,29 @@ func _on_hint_button_clicked() -> void:
 		return
 	AudioManager.play("paper")
 	
+	var encounter = EncountersData.get_data(encounter_index)
+	
+	var popup = preload("res://objects/ui/popup/my_popup.tscn").instantiate()
+	popup.title_text = "Hint #%d" % (encounter_index + 1)
+	popup.message_text = encounter.hint
+	
+	var spoiler = preload("res://objects/ui/game/spoiler_text.tscn").instantiate() as SpoilerText
+	var card_names: Array[String] = []
+	for i in range(get_slots_count()):
+		if i >= encounter.solution_cards.size():
+			card_names.push_back("<empty>")
+			continue
+		var card_id: String = encounter.solution_cards[i]
+		if card_id.length() == 0:
+			card_names.push_back("<empty>")
+			continue
+		else:
+			var card_name = CardsData.get_data(card_id).name
+			card_names.push_back(card_name)
+				
+	spoiler.texts = card_names
+	popup.add_to_content(spoiler)
+	get_tree().root.add_child(popup)
+	await popup.closed
+	popup.queue_free()
 	

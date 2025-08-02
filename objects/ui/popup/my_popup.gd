@@ -50,3 +50,6 @@ func _on_close_icon_gui_input(event: InputEvent) -> void:
 		closed.emit({})
 		get_viewport().set_input_as_handled()
 		AudioManager.play("paper")
+
+func add_to_content(node: Control) -> void:
+	%Content.add_child(node)
