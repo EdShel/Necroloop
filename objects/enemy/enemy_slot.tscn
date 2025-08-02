@@ -5,5 +5,5 @@
 [node name="EnemySlot" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.184314)
+self_modulate = Color(0.560784, 0.490196, 0.396078, 0.12549)
 texture = ExtResource("1_h2qwk")

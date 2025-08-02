@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://ccu0y8vi0lnt6" path="res://objects/table/card_slot.gd" id="2_t8p31"]
 
 [node name="CardSlot" type="Sprite2D" groups=["card_slot"]]
+self_modulate = Color(0.560784, 0.490196, 0.396078, 0.713726)
 z_index = -1
 texture = ExtResource("1_4p01y")
 script = ExtResource("2_t8p31")
