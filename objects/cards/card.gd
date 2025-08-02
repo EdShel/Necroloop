@@ -75,6 +75,7 @@ func _on_area_input_event(viewport: Node, event: InputEvent, _shape_idx: int) ->
 				drag_offset = global_position - event.position
 				z_index = Z_INDEX_DRAG
 				material.set("shader_parameter/x_rot", deg_to_rad(10))
+				Bus.card_drag_begin.emit()
 			else:
 				drag_offset = Vector2.INF
 				_release_card(false)
@@ -96,6 +97,8 @@ func _input(event: InputEvent) -> void:
 		global_position = event.position + drag_offset
 
 func _release_card(to_the_hand_only: bool) -> void:
+	Bus.card_released.emit()
+	
 	var prev_parent = get_parent()
 	var tween = _create_new_animation_tween()
 	

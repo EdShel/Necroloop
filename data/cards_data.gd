@@ -33,7 +33,7 @@ static var cards: Array[CardMetadata] = [
 	CardMetadata.new(
 		"wildcard",
 		"Wildcard",
-		"Becomes another card based on opponent's cards"
+		"Will become another card based on opponent's cards"
 	),
 ]
 

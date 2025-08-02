@@ -33,12 +33,6 @@ static var encounters: Array[EncounterMetadata] = [
 		"enemy_name": "Mimic",
 		"health": 500,
 		"cards": ["reverse", "reverse", "reverse", "reverse", "reverse", "", ""],
-	}),
-	EncounterMetadata.new({
-		"enemy_id": "cycloop",
-		"enemy_name": "Cycloop",
-		"health": 800,
-		"cards": ["attack", "reverse", "attack", "", "reverse", "multi", "attack"],
 		"reward_cards": ["reverse"],
 	}),
 	EncounterMetadata.new({
@@ -46,6 +40,12 @@ static var encounters: Array[EncounterMetadata] = [
 		"enemy_name": "Bee-Beep",
 		"health": 1000,
 		"cards": ["multi", "attack", "loop", "", "", "", ""],
+	}),
+	EncounterMetadata.new({
+		"enemy_id": "cycloop",
+		"enemy_name": "Cycloop",
+		"health": 800,
+		"cards": ["attack", "reverse", "attack", "", "reverse", "multi", "attack"],
 	}),
 	EncounterMetadata.new({
 		"enemy_id": "lich",

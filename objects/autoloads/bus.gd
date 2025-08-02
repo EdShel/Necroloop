@@ -8,3 +8,8 @@ signal battle_begin()
 signal battle_win()
 signal battle_defeat(reason: String)
 signal battle_cancel()
+
+signal card_drag_begin()
+signal card_released()
+
+signal enemy_slot_clicked()

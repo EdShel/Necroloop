@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://gpafxrx4i5wx"]
+[gd_scene load_steps=11 format=3 uid="uid://gpafxrx4i5wx"]
 
 [ext_resource type="PackedScene" uid="uid://b1kbi5lnjkpjg" path="res://objects/enemy/enemy_slot.tscn" id="1_liekj"]
 [ext_resource type="PackedScene" uid="uid://c6niequrehxah" path="res://objects/hand/hand.tscn" id="1_s2cr6"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://bpt4lyhxwwbff" path="res://objects/board.gdshader" id="2_sm4o3"]
 [ext_resource type="PackedScene" uid="uid://b6c1xu5i60nl7" path="res://objects/ui/game/play_button.tscn" id="5_mumcj"]
 [ext_resource type="PackedScene" uid="uid://bjf684cb746yx" path="res://objects/portraits/portrait.tscn" id="6_xtn1n"]
+[ext_resource type="PackedScene" uid="uid://qg4ck2ldqxyd" path="res://objects/ui/game/tip.tscn" id="8_u5e2k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u5e2k"]
 shader = ExtResource("2_sm4o3")
@@ -97,5 +98,8 @@ position = Vector2(200, 500)
 unique_name_in_owner = true
 position = Vector2(200, 200)
 id = "duck"
+
+[node name="Tip" parent="." instance=ExtResource("8_u5e2k")]
+position = Vector2(960, 1046)
 
 [connection signal="clicked" from="PlayButton" to="." method="_on_play_button_clicked"]
