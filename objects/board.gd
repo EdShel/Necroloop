@@ -8,8 +8,8 @@ func _enter_tree() -> void:
 	_begin_encounter(EncountersData.get_data(encounter_index))
 
 func _ready() -> void:
-	#var initial_cards: Array[String] = ["attack", "attack", "attack"]
-	var initial_cards: Array[String] = ["attack", "attack", "attack", "regen", "multi", "loop", "reverse"]
+	var initial_cards: Array[String] = ["attack", "attack", "attack"]
+	#var initial_cards: Array[String] = ["attack", "attack", "attack", "regen", "multi", "loop", "reverse"]
 	%Hand.add_cards(initial_cards)
 	
 	Bus.battle_win.connect(func():
@@ -44,6 +44,8 @@ func _ready() -> void:
 		_board_player.queue_free()
 		_board_player = null
 		
+		var encounter = EncountersData.get_data(encounter_index)
+		
 		var popup = preload("res://objects/ui/popup/my_popup.tscn").instantiate()
 		popup.title_text = "This will not work"
 		match reason:
@@ -55,11 +57,18 @@ func _ready() -> void:
 		await popup.closed
 		popup.queue_free()
 		
+		if encounter.enemy_id == "lich":
+			_init_enemy_table(encounter.cards)
+		
 		Bus.reset_player.emit()
 	)
 	Bus.battle_cancel.connect(func():
 		_board_player.queue_free()
 		_board_player = null
+		
+		var encounter = EncountersData.get_data(encounter_index)
+		if encounter.enemy_id == "lich":
+			_init_enemy_table(encounter.cards)
 		
 		Bus.reset_player.emit()
 	)
@@ -141,4 +150,3 @@ func _generate_lich_cards() -> Array[String]:
 			
 	
 	return result
-		

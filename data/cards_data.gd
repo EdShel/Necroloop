@@ -30,6 +30,11 @@ static var cards: Array[CardMetadata] = [
 		"Loop",
 		"Play all cards again. Cards to the right won't be played"
 	),
+	CardMetadata.new(
+		"wildcard",
+		"Wildcard",
+		"Becomes another card based on opponent's cards"
+	),
 ]
 
 static var cards_ord: Dictionary[String, int] = {}

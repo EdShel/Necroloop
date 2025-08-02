@@ -2,6 +2,13 @@ extends Node
 class_name EncountersData
 
 static var encounters: Array[EncounterMetadata] = [
+	
+	EncounterMetadata.new({
+		"enemy_id": "lich",
+		"enemy_name": "Necro Deck",
+		"health": 1000,
+		"cards": ["wildcard", "wildcard", "wildcard", "wildcard", "wildcard", "wildcard", "wildcard"],
+	}),
 	EncounterMetadata.new({
 		"enemy_id": "duck",
 		"enemy_name": "Sapwing",
@@ -51,7 +58,7 @@ static var encounters: Array[EncounterMetadata] = [
 		"enemy_id": "lich",
 		"enemy_name": "Lich",
 		"health": 1000,
-		"cards": ["", "", "", "", "", "", ""],
+		"cards": ["wildcard", "wildcard", "wildcard", "wildcard", "wildcard", "wildcard", "wildcard"],
 	}),
 ]
 
