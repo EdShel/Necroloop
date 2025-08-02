@@ -104,6 +104,7 @@ func _on_play_button_clicked() -> void:
 		Bus.battle_cancel.emit()
 		return
 	%PlayButton.toggle_state("pause")
+	AudioManager.play("paper")
 	
 	var encounter = EncountersData.get_data(encounter_index)
 	if encounter.enemy_id == "lich":
@@ -159,5 +160,6 @@ func _generate_lich_cards() -> Array[String]:
 func _on_hint_button_clicked() -> void:
 	if _board_player:
 		return
+	AudioManager.play("paper")
 	
 	

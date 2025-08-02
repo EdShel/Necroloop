@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://2guoqtym7lu4"]
+
+[ext_resource type="Script" uid="uid://cuxcvi748ce4" path="res://objects/autoloads/audio_manager.gd" id="1_rhkk6"]
+[ext_resource type="AudioStream" uid="uid://b8asv2nkh1cft" path="res://audio/the_field_of_dreams.wav" id="2_rhkk6"]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_rhkk6")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_rhkk6")
+autoplay = true

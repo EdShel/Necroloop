@@ -11,5 +11,6 @@ signal battle_cancel()
 
 signal card_drag_begin()
 signal card_released()
+signal card_snapped_to_slot()
 
 signal enemy_slot_clicked()

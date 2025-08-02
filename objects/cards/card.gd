@@ -116,6 +116,7 @@ func _release_card(to_the_hand_only: bool) -> void:
 	tween.parallel().tween_property(self, "material:shader_parameter/x_rot", 0, 0.1)
 	tween.tween_callback(func() -> void:
 		z_index = Z_INDEX_INACTIVE
+		Bus.card_snapped_to_slot.emit()
 	)
 	
 	var existing_card_to_move_into_hand: Card = null
@@ -130,6 +131,7 @@ func _release_card(to_the_hand_only: bool) -> void:
 			swap_tween.tween_property(existing_card, "global_position", prev_parent.global_position, 0.15)
 			swap_tween.tween_callback(func() -> void:
 				existing_card.z_index = Z_INDEX_INACTIVE
+				Bus.card_snapped_to_slot.emit()
 			)
 			swap_tween.tween_property(existing_card, "rotation", 0, 0.1)
 		else:

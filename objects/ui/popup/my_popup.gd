@@ -49,3 +49,4 @@ func _on_close_icon_gui_input(event: InputEvent) -> void:
 		_is_closing = true
 		closed.emit({})
 		get_viewport().set_input_as_handled()
+		AudioManager.play("paper")
