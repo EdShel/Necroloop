@@ -88,7 +88,7 @@ position = Vector2(960, 540)
 
 [node name="PlayButton" parent="." instance=ExtResource("5_mumcj")]
 unique_name_in_owner = true
-position = Vector2(1600, 920)
+position = Vector2(1662, 967)
 
 [node name="PlayerPortrait" parent="." instance=ExtResource("6_xtn1n")]
 position = Vector2(200, 500)

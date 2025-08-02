@@ -1,15 +1,48 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6c1xu5i60nl7"]
+[gd_scene load_steps=6 format=3 uid="uid://b6c1xu5i60nl7"]
 
 [ext_resource type="Script" uid="uid://d1ooy2f1u3ejo" path="res://objects/ui/game/play_button.gd" id="1_qi5ut"]
+[ext_resource type="Texture2D" uid="uid://tpio1dyb8mt2" path="res://sprites/play_button.png" id="2_crgd6"]
+[ext_resource type="FontFile" uid="uid://gfyoxvkyk86o" path="res://style/merienda.woff2" id="3_nod7d"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7q8oh"]
+font = ExtResource("3_nod7d")
+font_size = 45
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m458y"]
+size = Vector2(303, 228)
 
 [node name="PlayButton" type="Node2D"]
 script = ExtResource("1_qi5ut")
 
-[node name="Button" type="Button" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-offset_right = 8.0
-offset_bottom = 8.0
-theme_override_font_sizes/font_size = 51
-text = "Play cards"
+texture = ExtResource("2_crgd6")
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="Label" type="Label" parent="Sprite"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.5
+offset_top = -147.5
+offset_right = -32.5
+offset_bottom = -72.5
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.0436332
+text = "Play cards"
+label_settings = SubResource("LabelSettings_7q8oh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClickArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea"]
+position = Vector2(3.5, 8)
+shape = SubResource("RectangleShape2D_m458y")
+
+[connection signal="input_event" from="ClickArea" to="." method="_on_click_area_input_event"]
+[connection signal="mouse_entered" from="ClickArea" to="." method="_on_click_area_mouse_entered"]
+[connection signal="mouse_exited" from="ClickArea" to="." method="_on_click_area_mouse_exited"]

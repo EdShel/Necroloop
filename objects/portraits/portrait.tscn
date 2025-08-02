@@ -41,9 +41,9 @@ horizontal_alignment = 1
 [node name="Health" type="Label" parent="."]
 unique_name_in_owner = true
 offset_left = -99.0
-offset_top = 104.96
+offset_top = 106.96
 offset_right = 101.0
-offset_bottom = 154.96
+offset_bottom = 156.96
 pivot_offset = Vector2(100, 25)
 text = "500 HP"
 label_settings = SubResource("LabelSettings_viq1o")
