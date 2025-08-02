@@ -102,4 +102,13 @@ id = "duck"
 [node name="Tip" parent="." instance=ExtResource("8_u5e2k")]
 position = Vector2(960, 1046)
 
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(1690, 715.155)
+
+[node name="Button" type="Button" parent="Node2D"]
+offset_right = 100.0
+offset_bottom = 38.0
+focus_mode = 0
+text = "See hint"
+
 [connection signal="clicked" from="PlayButton" to="." method="_on_play_button_clicked"]

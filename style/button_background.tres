@@ -1,0 +1,10 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://b6d2uw3yp8w6n"]
+
+[ext_resource type="Texture2D" uid="uid://dh1485al3bm7a" path="res://sprites/button_9_patch.png" id="1_cdcci"]
+
+[resource]
+texture = ExtResource("1_cdcci")
+texture_margin_left = 32.0
+texture_margin_top = 8.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0

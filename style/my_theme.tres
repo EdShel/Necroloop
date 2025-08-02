@@ -1,5 +1,13 @@
-[gd_resource type="Theme" format=3 uid="uid://bermxrx1ed8u"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bermxrx1ed8u"]
+
+[ext_resource type="StyleBox" uid="uid://b6d2uw3yp8w6n" path="res://style/button_background.tres" id="1_5qceq"]
+[ext_resource type="StyleBox" uid="uid://dhac540jjhvc6" path="res://style/button_hover_background.tres" id="2_gqjws"]
 
 [resource]
+Button/font_sizes/font_size = 30
+Button/styles/focus = ExtResource("1_5qceq")
+Button/styles/hover = ExtResource("2_gqjws")
+Button/styles/normal = ExtResource("1_5qceq")
+Button/styles/pressed = ExtResource("2_gqjws")
 Label/constants/line_spacing = 10
 Label/font_sizes/font_size = 22
