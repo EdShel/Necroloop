@@ -12,6 +12,15 @@ var message_text: String:
 	set(value): %Message.text = value
 	get: return %Message.text
 
+func _ready() -> void:
+	modulate = Color.hex(0xffffff00)
+	var original_position = %Box.position
+	%Box.position = original_position + Vector2(0, 400)
+	var tween = create_tween().set_parallel()
+	tween.tween_property(self, "modulate", Color.WHITE, 0.3)
+	tween.tween_property(%Box, "position", original_position, 0.1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	
+
 func _on_cancel_button_pressed() -> void:
 	_is_closing = true
 	closed.emit({})
