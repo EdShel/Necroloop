@@ -8,8 +8,8 @@ func _enter_tree() -> void:
 	_begin_encounter(EncountersData.get_data(encounter_index))
 
 func _ready() -> void:
-	var initial_cards: Array[String] = ["attack", "attack", "attack"]
-	#var initial_cards: Array[String] = ["attack", "attack", "attack", "multi", "loop", "reverse"]
+	#var initial_cards: Array[String] = ["attack", "attack", "attack"]
+	var initial_cards: Array[String] = ["attack", "attack", "attack", "regen", "multi", "loop", "reverse"]
 	%Hand.add_cards(initial_cards)
 	
 	Bus.battle_win.connect(func():

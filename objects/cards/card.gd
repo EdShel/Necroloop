@@ -24,6 +24,8 @@ func _ready() -> void:
 	%Name.text = data.name
 	%Text.text = data.text
 	%Graphics.texture = load("res://sprites/card_graphics/%s.png" % data.id)
+	if data.id == "loop":
+		texture = preload("res://sprites/loop_frame.png")
 	Bus.battle_begin.connect(func():
 		_locked = true
 		if is_dragged():
