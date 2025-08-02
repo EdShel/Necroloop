@@ -7,13 +7,12 @@
 [ext_resource type="FontFile" uid="uid://gfyoxvkyk86o" path="res://style/merienda.woff2" id="4_bbpfw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bqtr4"]
+resource_local_to_scene = true
 shader = ExtResource("1_bqtr4")
 shader_parameter/rect_size = Vector2(200, 250)
 shader_parameter/fov = 90.0
-shader_parameter/cull_back = true
 shader_parameter/y_rot = 0.0
 shader_parameter/x_rot = 0.0
-shader_parameter/inset = 0.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_lsp3c"]
 viewport_path = NodePath("SubViewport")

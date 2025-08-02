@@ -74,6 +74,7 @@ func _on_area_input_event(viewport: Node, event: InputEvent, _shape_idx: int) ->
 			if !is_dragged():
 				drag_offset = global_position - event.position
 				z_index = Z_INDEX_DRAG
+				material.set("shader_parameter/x_rot", deg_to_rad(10))
 			else:
 				drag_offset = Vector2.INF
 				_release_card(false)
@@ -82,7 +83,7 @@ func _on_area_input_event(viewport: Node, event: InputEvent, _shape_idx: int) ->
 				viewport.set_input_as_handled()
 				drag_offset = Vector2.INF
 				_release_card(true)
-			
+
 
 func _input(event: InputEvent) -> void:
 	if _is_interaction_disabled():
@@ -109,6 +110,7 @@ func _release_card(to_the_hand_only: bool) -> void:
 		tween.tween_property(self, "global_position", new_parent.global_position, 0.1)
 		
 	tween.parallel().tween_property(self, "rotation", 0, 0.1)
+	tween.parallel().tween_property(self, "material:shader_parameter/x_rot", 0, 0.1)
 	tween.tween_callback(func() -> void:
 		z_index = Z_INDEX_INACTIVE
 	)
@@ -191,7 +193,7 @@ func play_hightlighted_animation() -> void:
 	rotation = 0
 	var tween = _create_new_animation_tween().set_parallel(true)
 	tween.tween_property(self, "position:y", -30, 0.1)
-	tween.tween_property(self, "material:shader_parameter/x_rot", 10, 0.1)
+	tween.tween_property(self, "material:shader_parameter/x_rot", deg_to_rad(6), 0.1)
 
 func play_unhighlight_animation() -> void:
 	if z_index != Card.Z_INDEX_ACTIVE:
