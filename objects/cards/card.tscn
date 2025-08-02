@@ -1,9 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://dk7if6sj2a66x"]
+[gd_scene load_steps=11 format=3 uid="uid://dk7if6sj2a66x"]
 
+[ext_resource type="Shader" uid="uid://d1ilhgxxa1o5t" path="res://objects/cards/card.gdshader" id="1_bqtr4"]
 [ext_resource type="Texture2D" uid="uid://dw25ysvbblm3l" path="res://sprites/card_frame.png" id="1_k08bj"]
 [ext_resource type="Script" uid="uid://cjpj3gwuh8x06" path="res://objects/cards/card.gd" id="2_e7lgl"]
 [ext_resource type="Texture2D" uid="uid://ds0pyrvsh0dhu" path="res://sprites/card_graphics/attack.png" id="3_bbpfw"]
 [ext_resource type="FontFile" uid="uid://gfyoxvkyk86o" path="res://style/merienda.woff2" id="4_bbpfw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bqtr4"]
+shader = ExtResource("1_bqtr4")
+shader_parameter/rect_size = Vector2(200, 250)
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_lsp3c"]
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jaq78"]
 size = Vector2(200, 250)
@@ -17,7 +30,8 @@ line_spacing = 0.0
 font_size = 18
 
 [node name="Card" type="Sprite2D" groups=["card"]]
-texture = ExtResource("1_k08bj")
+material = SubResource("ShaderMaterial_bqtr4")
+texture = SubResource("ViewportTexture_lsp3c")
 script = ExtResource("2_e7lgl")
 
 [node name="Area" type="Area2D" parent="."]
@@ -26,12 +40,23 @@ script = ExtResource("2_e7lgl")
 shape = SubResource("RectangleShape2D_jaq78")
 debug_color = Color(0.829488, 0.333483, 0.551073, 0.121569)
 
-[node name="Graphics" type="Sprite2D" parent="."]
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(200, 250)
+
+[node name="Frame" type="Sprite2D" parent="SubViewport"]
+unique_name_in_owner = true
+position = Vector2(100, 125)
+texture = ExtResource("1_k08bj")
+
+[node name="Graphics" type="Sprite2D" parent="SubViewport/Frame"]
 unique_name_in_owner = true
 position = Vector2(0, -35)
 texture = ExtResource("3_bbpfw")
 
-[node name="Name" type="Label" parent="."]
+[node name="Name" type="Label" parent="SubViewport/Frame"]
 unique_name_in_owner = true
 offset_left = -90.0
 offset_top = -117.515
@@ -41,7 +66,7 @@ text = "Loop"
 label_settings = SubResource("LabelSettings_bqtr4")
 horizontal_alignment = 1
 
-[node name="Text" type="Label" parent="."]
+[node name="Text" type="Label" parent="SubViewport/Frame"]
 unique_name_in_owner = true
 offset_left = -85.0
 offset_top = 18.0

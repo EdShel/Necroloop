@@ -25,7 +25,7 @@ func _ready() -> void:
 	%Text.text = data.text
 	%Graphics.texture = load("res://sprites/card_graphics/%s.png" % data.id)
 	if data.id == "loop":
-		texture = preload("res://sprites/loop_frame.png")
+		%Frame.texture = preload("res://sprites/loop_frame.png")
 	Bus.battle_begin.connect(func():
 		_locked = true
 		if is_dragged():
@@ -189,8 +189,9 @@ func _is_interaction_disabled() -> bool:
 func play_hightlighted_animation() -> void:
 	z_index = Card.Z_INDEX_ACTIVE
 	rotation = 0
-	var tween = _create_new_animation_tween()
+	var tween = _create_new_animation_tween().set_parallel(true)
 	tween.tween_property(self, "position:y", -30, 0.1)
+	tween.tween_property(self, "material:shader_parameter/x_rot", 10, 0.1)
 
 func play_unhighlight_animation() -> void:
 	if z_index != Card.Z_INDEX_ACTIVE:
@@ -200,6 +201,8 @@ func play_unhighlight_animation() -> void:
 	rotation = 0
 	var tween = _create_new_animation_tween()
 	tween.tween_property(self, "position:y", 0, 0.05)
+	tween.tween_property(self, "material:shader_parameter/x_rot", 0, 0.1)
+	
 
 func play_shift_to_new_position_in_hand(new_position_x: float) -> void:
 	if new_position_x == position.x:
