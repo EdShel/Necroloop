@@ -31,7 +31,7 @@ func _ready() -> void:
 		else:
 			var popup = preload("res://objects/ui/popup/my_popup.tscn").instantiate()
 			popup.title_text = "Foe defeated"
-			popup.message_text = "Brilliant planning! Wait, who's lurking out there in the shadows?"
+			popup.message_text = "Brilliant planning!\nWait, who else is lurking out there in the shadows?"
 			get_tree().root.add_child(popup)
 			await popup.closed
 			popup.queue_free()
@@ -49,7 +49,7 @@ func _ready() -> void:
 		match reason:
 			"dead": popup.message_text = "Your health was depleted"
 			"too_much_loops": popup.message_text = "This isn't going anywhere - there are too much loops"
-			"no_loop": popup.message_text = "You played all your cards but the enemy is still alive. Did you forget to place LOOP card?"
+			"no_loop": popup.message_text = "You played all your cards but the enemy is still alive.\nDid you forget to place Loop card?"
 			_: popup.message_text = "Try again"
 		get_tree().root.add_child(popup)
 		await popup.closed

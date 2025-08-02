@@ -26,11 +26,9 @@ func _on_cancel_button_pressed() -> void:
 	closed.emit({})
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if event.keycode == KEY_ESCAPE:
-			closed.emit({})
-			get_viewport().set_input_as_handled()
-
+	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("ui_accept"):
+		closed.emit({})
+		get_viewport().set_input_as_handled()
 
 func _on_close_icon_mouse_entered() -> void:
 	if _is_closing or not %CloseIcon:
