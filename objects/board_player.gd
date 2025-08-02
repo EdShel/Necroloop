@@ -21,7 +21,9 @@ func _ready() -> void:
 			await get_tree().create_timer(2.0).timeout
 			Bus.battle_defeat.emit("dead")
 		else:
-			await get_tree().create_timer(2.0).timeout
+			await get_tree().create_timer(0.5).timeout
+			AudioManager.play("howl")
+			await get_tree().create_timer(1.5).timeout
 			Bus.battle_win.emit()
 	)
 
@@ -67,6 +69,8 @@ func _process_next_card() -> void:
 
 func _play_card(card: Card, is_player: bool) -> void:
 	card.set_shining_enabled(true)
+	
+	AudioManager.play("whistle")
 	
 	var multiplier = _accumulated_multipliers[is_player]
 	var last_player_card = _last_played_cards[is_player]

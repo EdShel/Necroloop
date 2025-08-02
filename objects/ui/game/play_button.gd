@@ -20,6 +20,7 @@ func _on_click_area_input_event(viewport: Viewport, event: InputEvent, shape_idx
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			viewport.set_input_as_handled()
 			_handle_clicked()
+			AudioManager.play("paper")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):

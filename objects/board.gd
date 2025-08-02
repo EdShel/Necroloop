@@ -48,7 +48,7 @@ func _ready() -> void:
 		_board_player.queue_free()
 		_board_player = null
 		
-		var encounter = EncountersData.get_data(encounter_index)
+		AudioManager.play("error")
 		
 		var popup = preload("res://objects/ui/popup/my_popup.tscn").instantiate()
 		popup.title_text = "This will not work"
@@ -61,6 +61,7 @@ func _ready() -> void:
 		await popup.closed
 		popup.queue_free()
 		
+		var encounter = EncountersData.get_data(encounter_index)
 		if encounter.enemy_id == "lich":
 			_init_enemy_table(encounter.cards)
 		
@@ -104,7 +105,6 @@ func _on_play_button_clicked() -> void:
 		Bus.battle_cancel.emit()
 		return
 	%PlayButton.toggle_state("pause")
-	AudioManager.play("paper")
 	
 	var encounter = EncountersData.get_data(encounter_index)
 	if encounter.enemy_id == "lich":
