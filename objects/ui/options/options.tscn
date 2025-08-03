@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ppju36j0mg2e"]
+
+[ext_resource type="Script" uid="uid://w4k0jycev00v" path="res://objects/ui/options/options.gd" id="1_37fjm"]
+[ext_resource type="PackedScene" uid="uid://dcn8n5n61xylg" path="res://objects/vfx/background.tscn" id="2_2t8hb"]
+
+[node name="Options" type="Node2D"]
+script = ExtResource("1_37fjm")
+
+[node name="Background" parent="." instance=ExtResource("2_2t8hb")]
+position = Vector2(960, 540)

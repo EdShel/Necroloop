@@ -1,5 +1,9 @@
 extends Node
 
+signal open_game()
+signal open_options()
+signal open_menu()
+
 signal portrait_damaged(amount: int, is_player: bool)
 signal portrait_died(is_player: bool)
 signal reset_player()

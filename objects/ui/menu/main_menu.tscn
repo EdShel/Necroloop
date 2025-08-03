@@ -1,0 +1,106 @@
+[gd_scene load_steps=9 format=3 uid="uid://cy26gx25f2um0"]
+
+[ext_resource type="Script" uid="uid://5io85d0a6a3s" path="res://objects/ui/menu/main_menu.gd" id="1_ntxoe"]
+[ext_resource type="PackedScene" uid="uid://dcn8n5n61xylg" path="res://objects/vfx/background.tscn" id="1_trayo"]
+[ext_resource type="FontFile" uid="uid://gfyoxvkyk86o" path="res://style/merienda.woff2" id="2_o6dfk"]
+[ext_resource type="PackedScene" uid="uid://b0uwwjwt5e11r" path="res://objects/ui/menu/parallax.tscn" id="3_o6dfk"]
+[ext_resource type="Texture2D" uid="uid://cp10ihpxif7r" path="res://sprites/story/gmtk2025.png" id="4_axqay"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_axqay"]
+font = ExtResource("2_o6dfk")
+font_size = 146
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ntxoe"]
+font = ExtResource("2_o6dfk")
+font_size = 86
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y3sxb"]
+size = Vector2(666, 135.185)
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_ntxoe")
+
+[node name="Background" parent="." instance=ExtResource("1_trayo")]
+position = Vector2(960, 540)
+
+[node name="Title" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = 8.435
+offset_right = 1920.0
+offset_bottom = 223.015
+grow_horizontal = 2
+text = "Looparoid"
+label_settings = SubResource("LabelSettings_axqay")
+horizontal_alignment = 1
+
+[node name="Parallax" parent="." instance=ExtResource("3_o6dfk")]
+position = Vector2(1030, 540)
+
+[node name="PlayButton" type="Node2D" parent="."]
+position = Vector2(400, 800)
+
+[node name="PlayText" type="Label" parent="PlayButton"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -318.5
+offset_top = -62.5
+offset_right = 318.5
+offset_bottom = 62.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(319.13, 65.465)
+text = "Start the game"
+label_settings = SubResource("LabelSettings_ntxoe")
+horizontal_alignment = 1
+
+[node name="PlayButtonArea" type="Area2D" parent="PlayButton"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayButton/PlayButtonArea"]
+shape = SubResource("RectangleShape2D_y3sxb")
+
+[node name="OptionsButton" type="Node2D" parent="."]
+position = Vector2(400, 956.34)
+
+[node name="OptionsText" type="Label" parent="OptionsButton"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -318.5
+offset_top = -62.5
+offset_right = 318.5
+offset_bottom = 62.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(319.13, 65.465)
+text = "Options"
+label_settings = SubResource("LabelSettings_ntxoe")
+horizontal_alignment = 1
+
+[node name="OptionsButtonArea" type="Area2D" parent="OptionsButton"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OptionsButton/OptionsButtonArea"]
+shape = SubResource("RectangleShape2D_y3sxb")
+
+[node name="Gmtk2025" type="Sprite2D" parent="."]
+position = Vector2(1598, 843)
+texture = ExtResource("4_axqay")
+
+[connection signal="input_event" from="PlayButton/PlayButtonArea" to="." method="_on_play_button_area_input_event"]
+[connection signal="mouse_entered" from="PlayButton/PlayButtonArea" to="." method="_on_play_button_area_mouse_entered"]
+[connection signal="mouse_exited" from="PlayButton/PlayButtonArea" to="." method="_on_play_button_area_mouse_exited"]
+[connection signal="input_event" from="OptionsButton/OptionsButtonArea" to="." method="_on_options_button_area_input_event"]
+[connection signal="mouse_entered" from="OptionsButton/OptionsButtonArea" to="." method="_on_options_button_area_mouse_entered"]
+[connection signal="mouse_exited" from="OptionsButton/OptionsButtonArea" to="." method="_on_options_button_area_mouse_exited"]

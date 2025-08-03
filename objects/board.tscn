@@ -1,36 +1,20 @@
-[gd_scene load_steps=12 format=3 uid="uid://gpafxrx4i5wx"]
+[gd_scene load_steps=10 format=3 uid="uid://gpafxrx4i5wx"]
 
 [ext_resource type="PackedScene" uid="uid://b1kbi5lnjkpjg" path="res://objects/enemy/enemy_slot.tscn" id="1_liekj"]
 [ext_resource type="PackedScene" uid="uid://c6niequrehxah" path="res://objects/hand/hand.tscn" id="1_s2cr6"]
 [ext_resource type="Script" uid="uid://wdsjq6l5yne7" path="res://objects/board.gd" id="1_tyihr"]
+[ext_resource type="PackedScene" uid="uid://dcn8n5n61xylg" path="res://objects/vfx/background.tscn" id="2_p1kro"]
 [ext_resource type="PackedScene" uid="uid://cwopxsf733vi2" path="res://objects/table/card_slot.tscn" id="2_s2cr6"]
-[ext_resource type="Shader" uid="uid://bpt4lyhxwwbff" path="res://objects/board.gdshader" id="2_sm4o3"]
 [ext_resource type="PackedScene" uid="uid://b6c1xu5i60nl7" path="res://objects/ui/game/play_button.tscn" id="5_mumcj"]
 [ext_resource type="PackedScene" uid="uid://bjf684cb746yx" path="res://objects/portraits/portrait.tscn" id="6_xtn1n"]
 [ext_resource type="PackedScene" uid="uid://qg4ck2ldqxyd" path="res://objects/ui/game/tip.tscn" id="8_u5e2k"]
 [ext_resource type="PackedScene" uid="uid://bnhv7sl8m6s2o" path="res://objects/ui/game/hint_button.tscn" id="9_p1kro"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_u5e2k"]
-shader = ExtResource("2_sm4o3")
-shader_parameter/color_a = Color(0.0536947, 0.0191263, 0.00317036, 1)
-shader_parameter/color_b = Color(0.0742827, 0.0330911, 0.0211766, 1)
-shader_parameter/inner_radius = 1.215
-shader_parameter/outer_radius = 0.05
-shader_parameter/dither_strength = 0.03
-shader_parameter/vignette_color = Color(0.246341, 0.142895, 0.011574, 1)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_sm4o3"]
-size = Vector2(1920, 1080)
-
 [node name="Board" type="Node2D"]
 script = ExtResource("1_tyihr")
 
-[node name="Background" type="Sprite2D" parent="."]
-z_index = -100
-material = SubResource("ShaderMaterial_u5e2k")
+[node name="Background" parent="." instance=ExtResource("2_p1kro")]
 position = Vector2(960, 540)
-texture = SubResource("PlaceholderTexture2D_sm4o3")
-metadata/_edit_lock_ = true
 
 [node name="EnemyTable" type="Node2D" parent="."]
 unique_name_in_owner = true

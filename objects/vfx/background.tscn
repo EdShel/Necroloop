@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcn8n5n61xylg"]
+
+[ext_resource type="Shader" uid="uid://bpt4lyhxwwbff" path="res://objects/board.gdshader" id="1_84amp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u5e2k"]
+shader = ExtResource("1_84amp")
+shader_parameter/color_a = Color(0.0536947, 0.0191263, 0.00317036, 1)
+shader_parameter/color_b = Color(0.0742827, 0.0330911, 0.0211766, 1)
+shader_parameter/inner_radius = 1.215
+shader_parameter/outer_radius = 0.05
+shader_parameter/dither_strength = 0.03
+shader_parameter/vignette_color = Color(0.246341, 0.142895, 0.011574, 1)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_sm4o3"]
+size = Vector2(1920, 1080)
+
+[node name="Background" type="Sprite2D"]
+z_index = -100
+material = SubResource("ShaderMaterial_u5e2k")
+texture = SubResource("PlaceholderTexture2D_sm4o3")
+metadata/_edit_lock_ = true

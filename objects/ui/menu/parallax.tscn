@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0uwwjwt5e11r"]
+
+[ext_resource type="Script" uid="uid://bdp72v61mwvb5" path="res://objects/ui/menu/parallax.gd" id="1_bqa5y"]
+[ext_resource type="Texture2D" uid="uid://dxtdtykfx8yw4" path="res://sprites/story/box.png" id="1_q6byl"]
+[ext_resource type="Texture2D" uid="uid://bmb1x7yep8uy" path="res://sprites/story/roid.png" id="2_bqa5y"]
+[ext_resource type="Texture2D" uid="uid://c3t0r48vdmm8l" path="res://sprites/story/cat.png" id="3_lqpqt"]
+[ext_resource type="Texture2D" uid="uid://dxbqgaffwwcgc" path="res://sprites/story/scarf.png" id="4_q8fnr"]
+
+[node name="Parallax" type="Node2D"]
+script = ExtResource("1_bqa5y")
+parallax_elements = Dictionary[String, float]({
+"Box": 5.0,
+"Cat": 40.0,
+"Roid": 5.0,
+"Scarf": 5.0
+})
+
+[node name="Box" type="Sprite2D" parent="."]
+texture = ExtResource("1_q6byl")
+
+[node name="Roid" type="Sprite2D" parent="."]
+texture = ExtResource("2_bqa5y")
+
+[node name="Cat" type="Sprite2D" parent="."]
+texture = ExtResource("3_lqpqt")
+
+[node name="Scarf" type="Sprite2D" parent="."]
+texture = ExtResource("4_q8fnr")
