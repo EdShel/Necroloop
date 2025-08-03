@@ -10,3 +10,4 @@ script = ExtResource("1_rhkk6")
 unique_name_in_owner = true
 stream = ExtResource("2_rhkk6")
 autoplay = true
+bus = &"Music"

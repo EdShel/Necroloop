@@ -8,6 +8,8 @@ func _ready() -> void:
 	%Text.visible = false
 
 func _on_button_pressed() -> void:
+	AudioManager.play("paper")
+	
 	var text = ""
 	for i in range(_next_index + 1):
 		if i > 0:
